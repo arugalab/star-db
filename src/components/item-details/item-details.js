@@ -1,13 +1,10 @@
 import React, { Component, Fragment } from "react";
 import Spinner from "../spinner";
 import ErrorButton from "../error-button";
-import SwapiService from "../../services/swapi-service";
 
 import "./item-details.css";
 
 export default class ItemDetails extends Component {
-  swapiService = new SwapiService();
-
   state = { item: null, image: null };
 
   componentDidMount() {
@@ -64,3 +61,14 @@ export default class ItemDetails extends Component {
     return <div className="item-details card">{content}</div>;
   }
 }
+
+const Record = ({ item, field, label }) => {
+  return (
+    <li className="list-group-item">
+      <span className="term">{label}</span>
+      <span>{item[field]}</span>
+    </li>
+  );
+};
+
+export { Record };
