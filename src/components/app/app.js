@@ -4,6 +4,7 @@ import RandomPlanet from "../random-planet";
 import ErrorBoundary from "../error-boundary";
 import { SwapiServiceProvider } from "../swapi-service-context";
 import SwapiService from "../../services/swapi-service";
+import DummySwapiService from "../../services/dummy-swapi-service";
 import {
   PeopleList,
   PlanetsList,
@@ -30,9 +31,9 @@ export default class App extends Component {
             <PlanetsList />
             <StarshipsList />
 
-            <PersonDetails itemId={1} />
-            <PlanetDetails itemId={5} />
-            <StarshipDetails itemId={9} />
+            <PersonDetails itemId={2} />
+            <PlanetDetails itemId={2} />
+            <StarshipDetails itemId={5} />
           </div>
         </SwapiServiceProvider>
       </ErrorBoundary>
