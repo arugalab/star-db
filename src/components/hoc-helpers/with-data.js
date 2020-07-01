@@ -13,6 +13,14 @@ const withData = (View) => {
       });
     }
 
+    componentDidUpdate(prevProps) {
+      if (prevProps.getData !== this.props.getData) {
+        this.props.getData().then((data) => {
+          this.setState({ data });
+        });
+      }
+    }
+
     render() {
       const { data } = this.state;
 

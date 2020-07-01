@@ -17,14 +17,24 @@ import {
 import "./app.css";
 
 export default class App extends Component {
-  swapiService = new SwapiService();
+  state = {
+    swapiService: new SwapiService(),
+  };
+
+  handleServiceChange = () => {
+    this.setState(({ swapiService }) => {
+      const Service =
+        swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
+      return { swapiService: new Service() };
+    });
+  };
 
   render() {
     return (
       <ErrorBoundary>
-        <SwapiServiceProvider value={this.swapiService}>
+        <SwapiServiceProvider value={this.state.swapiService}>
           <div className="stardb-app">
-            <Header />
+            <Header handleServiceChange={this.handleServiceChange} />
             <RandomPlanet />
 
             <PeopleList />

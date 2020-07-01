@@ -1,7 +1,7 @@
 import React from "react";
 import "./header.css";
 
-const Header = () => {
+const Header = ({ handleServiceChange }) => {
   return (
     <div className="header d-flex">
       <h3>
@@ -18,6 +18,9 @@ const Header = () => {
           <a href="/#">Starships</a>
         </li>
       </ul>
+      <button className="btn btn-primary" onClick={handleServiceChange}>
+        Change Service
+      </button>
     </div>
   );
 };

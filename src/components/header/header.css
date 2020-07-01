@@ -30,3 +30,9 @@
 .header h3 a:hover {
   color: #00bc8c;
 }
+
+.header button {
+  margin-left: auto;
+  height: 2.6rem;
+  margin-top: 2px;
+}

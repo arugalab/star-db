@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import SwapiService from "../../services/swapi-service";
+import { withSwapiService } from "../hoc-helpers";
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
 import "./random-planet.css";
 
-export default class RandomPlanet extends Component {
-  swapiService = new SwapiService();
-
+class RandomPlanet extends Component {
   interval = null;
 
   state = {
@@ -35,10 +33,7 @@ export default class RandomPlanet extends Component {
 
   updatePlanet = () => {
     const id = Math.floor(Math.random() * 25) + 2;
-    this.swapiService
-      .getPlanet(id)
-      .then(this.onPlanetLoaded)
-      .catch(this.handleError);
+    this.props.getData(id).then(this.onPlanetLoaded).catch(this.handleError);
   };
 
   render() {
@@ -88,3 +83,11 @@ const PlanetView = ({ planet }) => {
     </React.Fragment>
   );
 };
+
+const mapMethodsToProps = (swapiService) => {
+  return {
+    getData: swapiService.getPlanet,
+  };
+};
+
+export default withSwapiService(RandomPlanet, mapMethodsToProps);
