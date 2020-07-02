@@ -10,6 +10,7 @@ class RandomPlanet extends Component {
 
   state = {
     planet: {},
+    image: null,
     loading: true,
     error: false,
   };
@@ -24,7 +25,11 @@ class RandomPlanet extends Component {
   }
 
   onPlanetLoaded = (planet) => {
-    this.setState({ planet, loading: false });
+    this.setState({
+      planet,
+      image: this.props.getImageUrl(planet),
+      loading: false,
+    });
   };
 
   handleError = (err) => {
@@ -32,16 +37,18 @@ class RandomPlanet extends Component {
   };
 
   updatePlanet = () => {
-    const id = Math.floor(Math.random() * 25) + 2;
+    const id = Math.floor(Math.random() * 20) + 1;
     this.props.getData(id).then(this.onPlanetLoaded).catch(this.handleError);
   };
 
   render() {
-    const { planet, loading, error } = this.state;
+    const { planet, image, loading, error } = this.state;
 
     const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || error) ? <PlanetView planet={planet} /> : null;
+    const content = !(loading || error) ? (
+      <PlanetView planet={planet} image={image} />
+    ) : null;
 
     return (
       <div className="random-planet jumbotron rounded">
@@ -53,16 +60,12 @@ class RandomPlanet extends Component {
   }
 }
 
-const PlanetView = ({ planet }) => {
-  const { id, name, population, rotationPeriod, diameter } = planet;
+const PlanetView = ({ planet, image }) => {
+  const { name, population, rotationPeriod, diameter } = planet;
 
   return (
     <React.Fragment>
-      <img
-        className="planet-image"
-        src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
-        alt=""
-      />
+      <img className="planet-image" src={image} alt="Planet Image" />
       <div>
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
@@ -87,6 +90,7 @@ const PlanetView = ({ planet }) => {
 const mapMethodsToProps = (swapiService) => {
   return {
     getData: swapiService.getPlanet,
+    getImageUrl: swapiService.getPlanetImage,
   };
 };
 
