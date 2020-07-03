@@ -9,7 +9,7 @@ class RandomPlanet extends Component {
   interval = null;
 
   state = {
-    planet: {},
+    planet: null,
     image: null,
     loading: true,
     error: false,
@@ -32,7 +32,7 @@ class RandomPlanet extends Component {
     });
   };
 
-  handleError = (err) => {
+  handleError = () => {
     this.setState({ error: true, loading: false });
   };
 
@@ -43,7 +43,6 @@ class RandomPlanet extends Component {
 
   render() {
     const { planet, image, loading, error } = this.state;
-
     const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? <Spinner /> : null;
     const content = !(loading || error) ? (
@@ -65,7 +64,7 @@ const PlanetView = ({ planet, image }) => {
 
   return (
     <React.Fragment>
-      <img className="planet-image" src={image} alt="Planet Image" />
+      <img className="planet-image" src={image} alt="Planet" />
       <div>
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
@@ -94,4 +93,4 @@ const mapMethodsToProps = (swapiService) => {
   };
 };
 
-export default withSwapiService(RandomPlanet, mapMethodsToProps);
+export default withSwapiService(mapMethodsToProps)(RandomPlanet);
