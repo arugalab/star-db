@@ -29,11 +29,17 @@ const PeopleList = compose(
   withData,
   withChildFunction(renderName)
 )(ItemList);
-const PlanetsList = withSwapiService(mapPlanetsMethodsToProps)(
-  withData(withChildFunction(renderName)(ItemList))
-);
-const StarshipsList = withSwapiService(mapStarshipsMethodsToProps)(
-  withData(withChildFunction(renderNameAndModel)(ItemList))
-);
+
+const PlanetsList = compose(
+  withSwapiService(mapPlanetsMethodsToProps),
+  withData,
+  withChildFunction(renderName)
+)(ItemList);
+
+const StarshipsList = compose(
+  withSwapiService(mapStarshipsMethodsToProps),
+  withData,
+  withChildFunction(renderNameAndModel)
+)(ItemList);
 
 export { PeopleList, PlanetsList, StarshipsList };
