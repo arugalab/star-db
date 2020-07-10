@@ -55,12 +55,9 @@ export default class ItemDetails extends Component {
       return <span>Select a item from a list</span>;
     }
 
-    const { id, name } = item;
+    const { name } = item;
 
     const content = (
-      // id !== this.props.itemId ? (
-      //   <Spinner />
-      // ) : (
       <Fragment>
         <img className="item-image" src={image} alt="" />
         <div className="card-body">
@@ -76,7 +73,6 @@ export default class ItemDetails extends Component {
         </div>
       </Fragment>
     );
-    // );
 
     return <div className="item-details card">{content}</div>;
   }
