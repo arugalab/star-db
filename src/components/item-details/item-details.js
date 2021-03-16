@@ -66,9 +66,6 @@ export default class ItemDetails extends Component {
             {React.Children.map(this.props.children, (child, idx) => {
               return React.cloneElement(child, { item: item });
             })}
-            <li className="list-group-item">
-              <ErrorButton />
-            </li>
           </ul>
         </div>
       </Fragment>
